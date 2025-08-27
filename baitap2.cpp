@@ -1,38 +1,43 @@
 #include <bits/stdc++.h>
 using namespace std;
-void solve(int a[],int n){
-    for (int i = 0 ; i < n ; i++){
-        a[i] = 0;
+int a[20] , n , k;
+// vector < string > vp;
+set < string > vp;
+
+vector <int > v;
+void inkq(){
+    string t = "";
+    for (int i = 1; i<= k ; i++){
+        t += to_string (v[a[i] - 1]);
     }
-    while (1){
-        for (int i = 0; i < n ; i++){
-            cout << a[i];
-        }
-        for (int i = n - 1; i>= 0 ;i--){
-            cout << a[i];
-        }
-        cout << " ";
-        int i = n - 1;
-        while (a[i]== 1 && i >= 0)
-        i--;
-        if (i < 0)
-        return;
-        a[i] = 1;
-        for (int j = i + 1; j< n; j++)
-        a[j] = 0; 
+    vp.insert(t);
+    // vp.push_back(t);
+}
+void backtrack (int pos){
+    for (int i = a[pos - 1] + 1; i <= n - k + pos ;i++){
+        a[pos] = i;
+        if (pos == k)
+        inkq();
+        else backtrack(pos + 1);
     }
 }
 int main(){
-    int t;
-    cin >> t;
-    while (t--){
-        int n;
-        cin >> n;
-        int a[n];
-        for (int i = 1; i <= n / 2 ; i++){
-            solve(a,i);
-        }
-        cout << endl;
+    cin >> n >> k;
+    for (int i = 0 ; i < n ; i++){
+        int x;
+        cin >> x;
+        v.push_back(x);
     }
+    for (int i = 1; i <= n ; i++ ){
+        k = i;
+        backtrack(1);
+    }
+   for (auto it : vp){
+    cout << it << endl;
+   }
+    //  sort (vp.begin() , vp.end());
+    //  for (int i = 0;  i < vp.size() ; i++){
+    //     cout <<vp[i] << endl;
+    //  }
     return 0;
 }
