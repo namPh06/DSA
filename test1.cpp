@@ -1,19 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, k, t=0, r=0;
-int a[1001];
-int b[1001];
-vector<vector<int>> g;
-
-int main(){
-	cin>>n>>k;
-	for(int i =1;i<=n;i++){
-		cin>>a[i];
-	}
-	quaylui(1,1,k);
-	for(int i =g.size()-1;i>=0;i--){
-		for(int j=0;j<g[i].size();j++)cout<<g[i][j]<<" ";
-		cout<<endl;
-	}
-	cout<<t;
+struct node{
+    int data;
+    node *left, *right;
+    node (int x){
+        data =x;
+        left= right = NULL;    
+    }
+}
+node *build (int a[],int l , int r){
+    if ( l > r)
+    return NULL;
+    int mid = (l +r ) / 2;
+    node *root = new node (a[mid]);
+    root -> left = build (a, l , mid - 1);
+    root  -> right = build (a , mid + 1, r);
+    return root ;
+}
+void postorder (node *root){
+    if (root != NULL){
+        postorder (root -> left);
+        postorder (root -> right);
+        cout << ropo QR,FP0=-89P0
+    }
 }

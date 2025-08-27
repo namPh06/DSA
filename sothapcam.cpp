@@ -1,36 +1,40 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 using namespace std;
-vector <int > v;
-void sang(){
-    queue < pair < long long,long long >> pq;
-    for (int i = 1 ; i <= 9 ; i++){
-        pq.push({i,i});
+
+// Hàm tính tổng chữ số
+int digitSum(int x) {
+    int sum = 0;
+    while (x > 0) {
+        sum += x % 10;
+        x /= 10;
     }
-    while (true){
-        pair <long long ,long long > x = pq.front();
-        pq.pop();
-        long long a = x.first , b = x.second;
-        if (b == 10){
-            v.push_back(a);
-            if (v.size() == 2e5)
-            return;
-        }
-        for (int i = 0 ;i <= 9 ; i++){
-            if (b + i <= 10){
-                pq.push({a*10 + i , b + i});
-            }
-            else break;
-        }
-    }
+    return sum;
 }
-signed main(){
-    sang();
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int MAX_N = 200005;
+    vector<int> specialNumbers;
+    int num = 19;
+    
+    // Tiền xử lý trước các số Thập Cẩm nhỏ nhất đến số thứ 200000
+    while ((int)specialNumbers.size() < MAX_N) {
+        if (digitSum(num) == 10) {
+            specialNumbers.push_back(num);
+        }
+        ++num;
+    }
+
     int t;
     cin >> t;
-    while(t--){
+    while (t--) {
         int n;
         cin >> n;
-        cout << v[n- 1] << endl;
+        cout << specialNumbers[n - 1] << '\n';
     }
+
     return 0;
 }
